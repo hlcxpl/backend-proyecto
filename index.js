@@ -21,6 +21,11 @@ app.use(cors());
 
 app.listen(3000, () => console.log("SERVER ON"));
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://transcendent-truffle-65cd89.netlify.app');
+  next();
+});
+
 app.get("/productos", async (req, res) => {
   try {
     const productos = await obtenerProducts();
