@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "jest --forceExit"
-  },
+
+  
+    "scripts": {
+      "test": "jest --forceExit",
+      "start": "node app.js",
+      "build": "npm run clean && npm run build:client && npm run build:server",
+      "build:client": "webpack --config webpack.client.config.js",
+      "build:server": "webpack --config webpack.server.config.js",
+      "clean": "rm -rf dist"
+    },
+   
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,7 +27,9 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "pg-format": "^1.0.4",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
