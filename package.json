@@ -1,20 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-
-  
   "scripts": {
     "test": "jest --forceExit",
     "start": "node app.js",
     "build": "npm run clean && npm run build:client && npm run build:server",
     "build:client": "webpack --config webpack.client.config.js",
     "build:server": "webpack --config webpack.server.config.js",
-    "clean": "rm -rf dist"
+    "clean": "rd /s /q dist"
   },
-  
-   
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -37,5 +32,9 @@
     "@babel/preset-env": "^7.20.2",
     "babel-jest": "^29.5.0",
     "nodemon": "^2.0.22"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "description": ""
 }
