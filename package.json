@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit",
-    "start": "node app.js",
-    "build": "npm run clean && npm run build:client && npm run build:server",
-    "build:client": "webpack --config webpack.client.config.js",
-    "build:server": "webpack --config webpack.server.config.js",
-    "clean": "rd /s /q dist"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "webpack --config webpack.config.js",
+    "test": "mocha",
+    "lint": "eslint .",
+    "prepublish": "npm run build",
+    "precommit": "npm run test && npm run lint"
   },
   "keywords": [],
   "author": "",
