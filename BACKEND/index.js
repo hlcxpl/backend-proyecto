@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
+console.log(process.env.JWT)
 const { reportarConsulta } = require("./middlewares/reporte_consulta.js");
 const {
   añadirProducto,
@@ -76,7 +78,7 @@ app.post("/login", reportarConsulta, async (req, res) => {
     const { email } = req.body;
     const usuario = req.body;
     await verificarCredenciales(usuario);
-    const token = jwt.sign({ email }, "a-z_A-Z");
+    const token = jwt.sign({ email }, process.env.JWT );
     res.send(token);
   } catch (error) {
     res.status(error.code || 500).send(error);
@@ -85,9 +87,8 @@ app.post("/login", reportarConsulta, async (req, res) => {
 
 app.get("/usuario", reportarConsulta, async (req, res) => {
   const Authorization = req.header("Authorization");
-  console.log(Authorization);
   const token = Authorization.split("Bearer ")[1];
-  jwt.verify(token, "a-z_A-Z");
+  jwt.verify(token, process.env.JWT);
   const { email } = jwt.decode(token);
   const usuario = await obtenerUsuario(email);
   const info = await mostrarInfo(usuario);
@@ -97,7 +98,6 @@ app.get("/usuario", reportarConsulta, async (req, res) => {
 app.put("/usuaruio/editar_info/:id", reportarConsulta, async (req, res) => {
   const { id } = req.params;
   const usuario = req.body;
-  console.log(usuario);
   await actualizarUsuario(id, usuario);
 });
 

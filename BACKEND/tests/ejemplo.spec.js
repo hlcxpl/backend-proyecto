@@ -36,7 +36,7 @@ describe("Operaciones CRUD de Productos", () => {
     expect(status).toBe(201);
   });
 
-  it("Borrando un producto y obtener un codigo 201 al hacerlo", async () => {
+  it("Borrando un producto y obtener un codigo 202 al hacerlo", async () => {
     const producto = {
       nombre: "balon",
     };

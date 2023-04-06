@@ -1,0 +1,6 @@
+[build]
+  functions = "lambda"
+
+[[functions]]
+  path = "/api/*"
+  command = "npm run api"

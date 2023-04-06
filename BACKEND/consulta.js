@@ -1,13 +1,21 @@
-const { Pool } = require("pg");
+var pg = require("pg");
 const bcrypt = require("bcryptjs");
+require('dotenv').config();
 
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  password: "luispost",
-  database: "ecommerce",
-  allowExitOnIdle: true,
+
+const { Client } = require("pg");
+const client = new Client({
+  connectionString: process.env.DBURL,
 });
+
+client.connect((err) => {
+  if (err) {
+    console.error("Error al conectarse a la base de datos", err.stack);
+  } else {
+    console.log("Conexión a la base de datos exitosa");
+  }
+});
+
 
 const añadirProducto = async ({
   nombre,
@@ -26,19 +34,19 @@ const añadirProducto = async ({
     precio_oferta,
     img_url,
   ];
-  await pool.query(query, values);
+  await client.query(query, values);
 };
 
 const obtenerProducts = async () => {
   const query = " select * from productos";
-  const { rows: productos } = await pool.query(query);
+  const { rows: productos } = await client.query(query);
   return productos;
 };
 
-const borrarProducto = async ( nombre ) => {
+const borrarProducto = async (nombre) => {
   const query = "delete from productos where nombre= $1";
   value = [nombre];
-  const result = await pool.query(query, value);
+  const result = await client.query(query, value);
   return result;
 };
 
@@ -61,7 +69,7 @@ const añadirUsuario = async ({
     comuna,
     telefono,
   ];
-  await pool.query(query, values);
+  await client.query(query, values);
 };
 
 const verificarCredenciales = async ({ email, password }) => {
@@ -70,7 +78,7 @@ const verificarCredenciales = async ({ email, password }) => {
   const {
     rows: [usuario],
     rowCount,
-  } = await pool.query(consulta, values);
+  } = await client.query(consulta, values);
   const { password: passwordEncryptada } = usuario;
   const passwordiscorrect = bcrypt.compareSync(password, passwordEncryptada);
   if (!passwordiscorrect || !rowCount)
@@ -79,7 +87,7 @@ const verificarCredenciales = async ({ email, password }) => {
 const obtenerUsuario = async (email) => {
   const values = [email];
   consulta = "Select * from usuarios where email = $1";
-  const { rows: usuario } = await pool.query(consulta, values);
+  const { rows: usuario } = await client.query(consulta, values);
   return usuario[0];
 };
 const mostrarInfo = (usuario) => {
@@ -112,7 +120,7 @@ const actualizarUsuario = async ({
     comuna,
     telefono,
   ];
-  await pool.query(consulta, values);
+  await client.query(consulta, values);
 };
 
 module.exports = {
