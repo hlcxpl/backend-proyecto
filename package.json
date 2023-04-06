@@ -13,6 +13,7 @@
     "build:server": "webpack --config webpack.server.config.js",
     "clean": "rm -rf dist"
   },
+  
    
   "keywords": [],
   "author": "",
