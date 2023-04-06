@@ -17,15 +17,36 @@ const {
 } = require("./consulta");
 
 app.use(express.json());
-app.use(cors());
+
 
 app.listen(3000, () => console.log("SERVER ON"));
+
+const corsOptions = {
+  origin: 'https://tu-dominio.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://transcendent-truffle-65cd89.netlify.app');
   next();
 });
 
+
+app.use((req, res, next) => {
+  // Permitir solicitudes desde cualquier origen
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Permitir los siguientes métodos HTTP
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  // Permitir los siguientes encabezados
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // Continuar con la siguiente ruta o middleware
+  next();
+
+});
 app.get("/productos", async (req, res) => {
   try {
     const productos = await obtenerProducts();
