@@ -4,7 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 console.log(process.env.JWT)
-const { reportarConsulta } = require("./middlewares/reporte_consulta.js");
+const { reportarConsulta } = require("./middlewares/reporte_consulta");
 const {
   añadirProducto,
   obtenerProducts,
