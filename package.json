@@ -5,11 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "webpack --config webpack.config.js",
-    "test": "mocha",
-    "lint": "eslint .",
-    "prepublish": "npm run build",
-    "precommit": "npm run test && npm run lint"
+    "build": "npm run build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
