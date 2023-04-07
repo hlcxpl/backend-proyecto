@@ -5,7 +5,7 @@
   "scripts": {
     "start":  "nodemon index.js",
     "heroku-prebuild": "npm install -g yarn",
-    "heroku-postbuild": "npm run build",
+    "build": "npm run build",
     "heroku-release": "npm run migrate && npm run seed",
     "test": "jest"
   },
