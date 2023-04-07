@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start":  "nodemon index.js",
-    "heroku-prebuild": "npm install -g yarn",
-    "build": "npm run build",
-    "heroku-release": "npm run migrate && npm run seed",
+    "dev":"nodemon index.js",
+    "start":  "node index.js",
     "test": "jest"
   },
   "keywords": [],
