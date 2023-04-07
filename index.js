@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
-console.log(process.env.JWT)
+
 const { reportarConsulta } = require("./middlewares/reporte_consulta");
 const {
   añadirProducto,
@@ -22,7 +22,7 @@ app.use(express.json());
 app.listen(3000, () => console.log("SERVER ON"));
 
 const corsOptions = {
-  origin: 'https://tu-dominio.com',
+  origin: process.env.API_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
