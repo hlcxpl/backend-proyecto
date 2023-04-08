@@ -23,7 +23,7 @@ const PORT= process.env.PORT
 app.listen(PORT || 3000, () => console.log("SERVER ON IN PORT:",PORT))
 
 const corsOptions = {
-  origin: `${process.env.API_URL}/*`,
+  origin: `${process.env.API_URL}/`,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
