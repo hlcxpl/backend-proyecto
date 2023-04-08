@@ -45,6 +45,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get(process.env.API_URL), async (req, res)=>{
+  res.send({message: ""})
+}
 
 app.get("/productos", async (req, res) => {
   try {
