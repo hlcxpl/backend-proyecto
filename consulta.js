@@ -82,9 +82,7 @@ const verificarCredenciales = async ({ email, password }) => {
   const passwordiscorrect = bcrypt.compareSync(password, passwordEncryptada);
   if (!passwordiscorrect || !rowCount) {
     throw { code: 401, message: "Email y contraseña o Contraseña Incorrecta" };
-  } else if (passwordiscorrect) {
-    throw { code: 202, message: "Email y contraseña Correctas" };
-  }
+  } 
 };
 
 const obtenerUsuario = async (email) => {
