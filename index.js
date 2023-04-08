@@ -111,7 +111,7 @@ app.post("/login", reportarConsulta, async (req, res) => {
     const usuario = req.body;
     await verificarCredenciales(usuario);
     const token = jwt.sign({ email }, process.env.JWT);
-    res.status(203).send(token).send({ message: 'Acesso Autorizado' });
+    res.status(203).send({ message: 'Acesso Autorizado', token: token });
   } catch (error) {
     res.status(error.code || 500).send(error);
   }
