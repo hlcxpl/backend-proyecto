@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/"), async (req, res)=>{
+app.get(process.env.API_URL), async (req, res)=>{
   res.send('SERVER ON', PORT);
 }
 
