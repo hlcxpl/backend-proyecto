@@ -34,6 +34,7 @@ app.use(cors({
   origin: 'https://transcendent-truffle-65cd89.netlify.app/'
 }));
 
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
