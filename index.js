@@ -30,11 +30,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://transcendent-truffle-65cd89.netlify.app');
-  next();
-});
-
+app.use(cors({
+  origin: 'https://miotrodominio.com'
+}));
 
 app.use((req, res, next) => {
   // Permitir solicitudes desde cualquier origen
