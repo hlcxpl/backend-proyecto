@@ -10,7 +10,7 @@ describe("operaciones Crud ecomerce", () => {
 });
 
 describe("Operaciones CRUD de Productos", () => {
-  it("Probando que la ruta POST /admin/agregar_producto agrega un nuevo producto(nose puede por que el valor retornado viene con id serial) y el producto ya este repetido envio de codio status 400", async () => {
+  it("Probando que la ruta POST /admin/agregar_producto obtenga estatus 400 al agregar un producto repetido ", async () => {
     const producto = {
       nombre: "zapatillas",
       descripcion: "zapatillas deportivas",
