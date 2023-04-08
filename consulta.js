@@ -69,7 +69,8 @@ const añadirUsuario = async ({
     comuna,
     telefono,
   ];
-  await client.query(query, values);
+  const result = await client.query(query, values);
+  return result
 };
 
 const verificarCredenciales = async ({ email, password }) => {

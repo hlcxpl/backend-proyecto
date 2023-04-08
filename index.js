@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
+require("dotenv").config();
 
 const { reportarConsulta } = require("./middlewares/reporte_consulta");
 const {
@@ -18,22 +18,23 @@ const {
 
 app.use(express.json());
 
-const PORT= process.env.PORT
+const PORT = process.env.PORT;
 
-app.listen(PORT || 3000, () => console.log("SERVER ON IN PORT:",PORT))
+app.listen(PORT || 3000, () => console.log("SERVER ON IN PORT:", PORT));
 
 const corsOptions = {
   origin: `*`,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
 
-app.use(cors({
-  origin: 'https://transcendent-truffle-65cd89.netlify.app/'
-}));
-
+app.use(
+  cors({
+    origin: "https://transcendent-truffle-65cd89.netlify.app/",
+  })
+);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -45,9 +46,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(process.env.API_URL), async (req, res)=>{
-  res.send('SERVER ON', PORT);
-}
+app.get(process.env.API_URL),
+  async (req, res) => {
+    res.send("SERVER ON", PORT);
+  };
 
 app.get("/productos", async (req, res) => {
   try {
@@ -94,8 +96,10 @@ app.delete("/admin/agregar_producto/", async (req, res) => {
 app.post("/registrar", async (req, res) => {
   try {
     const usuario = req.body;
-    await añadirUsuario(usuario);
-    res.send("Usuario Registrado con Éxito");
+    const result = await añadirUsuario(usuario);
+    if (result) {
+      res.status(201).send({ message: "Usuario Registrado con Éxito" });
+    }
   } catch (error) {
     res.status(500).send(error);
   }
@@ -106,7 +110,7 @@ app.post("/login", reportarConsulta, async (req, res) => {
     const { email } = req.body;
     const usuario = req.body;
     await verificarCredenciales(usuario);
-    const token = jwt.sign({ email }, process.env.JWT );
+    const token = jwt.sign({ email }, process.env.JWT);
     res.send(token);
   } catch (error) {
     res.status(error.code || 500).send(error);
