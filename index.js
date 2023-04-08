@@ -31,7 +31,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(cors({
-  origin: 'https://miotrodominio.com'
+  origin: 'https://transcendent-truffle-65cd89.netlify.app/'
 }));
 
 app.use((req, res, next) => {
