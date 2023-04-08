@@ -35,17 +35,16 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
-  // Permitir solicitudes desde cualquier origen
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // Permitir los siguientes métodos HTTP
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  // Permitir los siguientes encabezados
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Continuar con la siguiente ruta o middleware
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
   next();
-
 });
+
+
 app.get("/productos", async (req, res) => {
   try {
     const productos = await obtenerProducts();
