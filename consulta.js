@@ -1,7 +1,6 @@
 var pg = require("pg");
 const bcrypt = require("bcryptjs");
-require('dotenv').config();
-
+require("dotenv").config();
 
 const { Client } = require("pg");
 const client = new Client({
@@ -15,7 +14,6 @@ client.connect((err) => {
     console.log("Conexión a la base de datos exitosa");
   }
 });
-
 
 const añadirProducto = async ({
   nombre,
@@ -70,7 +68,7 @@ const añadirUsuario = async ({
     telefono,
   ];
   const result = await client.query(query, values);
-  return result
+  return result;
 };
 
 const verificarCredenciales = async ({ email, password }) => {
@@ -82,9 +80,13 @@ const verificarCredenciales = async ({ email, password }) => {
   } = await client.query(consulta, values);
   const { password: passwordEncryptada } = usuario;
   const passwordiscorrect = bcrypt.compareSync(password, passwordEncryptada);
-  if (!passwordiscorrect || !rowCount)
+  if (!passwordiscorrect || !rowCount) {
     throw { code: 401, message: "Email y contraseña o Contraseña Incorrecta" };
+  } else if (passwordiscorrect) {
+    throw { code: 202, message: "Email y contraseña Correctas" };
+  }
 };
+
 const obtenerUsuario = async (email) => {
   const values = [email];
   consulta = "Select * from usuarios where email = $1";
