@@ -111,7 +111,7 @@ app.post("/login", reportarConsulta, async (req, res) => {
     const usuario = req.body;
     await verificarCredenciales(usuario);
     const token = jwt.sign({ email }, process.env.JWT);
-    res.json({ message: ' Acesso Autorizado ', token: token });
+    res.json({ message: ' Acceso Autorizado ', token: token });
   } catch (error) {
     res.status(error.code || 500).send(error);
   }
@@ -127,7 +127,7 @@ app.get("/usuario", reportarConsulta, async (req, res) => {
   res.json(info);
 });
 
-app.put("/usuaruio/editar_info/:id", reportarConsulta, async (req, res) => {
+app.put("/usuario/editar_info/:id", reportarConsulta, async (req, res) => {
   const { id } = req.params;
   const usuario = req.body;
   await actualizarUsuario(id, usuario);
