@@ -103,7 +103,6 @@ const mostrarInfo = (usuario) => {
   return info;
 };
 const actualizarUsuario = async (id,{
-  id,
   nombre,
   email,
   direccion_de_envio_por_default,
