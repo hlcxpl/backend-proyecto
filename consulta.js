@@ -102,7 +102,7 @@ const mostrarInfo = (usuario) => {
   };
   return info;
 };
-const actualizarUsuario = async ({
+const actualizarUsuario = async (id,{
   id,
   nombre,
   email,
