@@ -130,6 +130,7 @@ app.get("/usuario", reportarConsulta, async (req, res) => {
 app.put("/usuario/editar_info/:id", reportarConsulta, async (req, res) => {
   const { id } = req.params;
   const usuario = req.body;
+  console.log(id,usuario)
   await actualizarUsuario(id, usuario);
 });
 
